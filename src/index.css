@@ -6,11 +6,6 @@ body {
   background-color: #121212;
 }
 
-.su-field td,
-.su-field th {
-  @apply w-20 h-20    cursor-pointer;
-}
-
 .su-field tr:not(:last-child):nth-child(3n) td {
   @apply border-spacing-0 border-slate-700;
   border-bottom: 2px solid black;
