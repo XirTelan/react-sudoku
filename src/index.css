@@ -2,14 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --backgroundBorderColor: rgba(255, 255, 255, 0.226);
+}
+p {
+  @apply mb-8;
+}
 body {
   background-color: #121212;
 }
 
+.btn-main {
+  @apply flex rounded shrink-0  bg-mySecondary bg-opacity-90 hover:bg-opacity-50 w-20 h-20 text-white hover:text-myPrimary  text-4xl font-bold  text-center justify-center items-center;
+}
+.title {
+  @apply font-bold text-4xl my-3;
+}
 .su-field tr:not(:last-child):nth-child(3n) td {
-  @apply border-spacing-0 border-slate-700;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid var(--backgroundBorderColor);
 }
 .su-field tr td:not(:last-child):nth-child(3n) {
-  border-right: 2px solid black;
+  border-right: 2px solid var(--backgroundBorderColor);
 }
