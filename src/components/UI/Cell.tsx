@@ -14,7 +14,7 @@ export default function Cell(props: cellProps) {
   return (
     <td
       tabIndex={0}
-      className={`border hover:bg-myPrimary border-white border-opacity-5  w-5 h-5 sm:w-10 sm:h-10 lg:w-16 lg:h-16 hover:cursor-pointer focus-visible:outline-none text-base  sm:text-2xl  leading-3 font-bold ${
+      className={`border hover:bg-myPrimary border-white border-opacity-5  w-8 h-8  sm:w-16 sm:h-16 hover:cursor-pointer focus-visible:outline-none text-base  sm:text-2xl  leading-3 font-bold ${
         cell.predefined ? " text-slate-100" : "text-mySecondary"
       }  ${
         selectedCell.x == posX && selectedCell.y == posY
@@ -35,9 +35,12 @@ export default function Cell(props: cellProps) {
         ? cell.value
         : cell.notes.size > 0 && (
             <>
-              <div className="flex gap-1 flex-wrap">
+              <div className="flex sm:gap-1 justify-center items-center w-full h-full max-w-full max-h-full flex-wrap">
                 {NUMBERS.map((number, index) => (
-                  <div key={index} className="w-4 h-4">
+                  <div
+                    key={index}
+                    className="h-2 w-2 text-[8px] leading-[8px] sm:text-sx sm:leading-3 lg:text-base lg:font-bold  sm:w-3 sm:h-3 lg:leading-4 lg:w-4 lg:h-4"
+                  >
                     {cell.notes.has(number) ? number : ""}
                   </div>
                 ))}

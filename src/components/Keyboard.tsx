@@ -8,7 +8,7 @@ export default function Keyboard(props: keyboardProps) {
   return (
     <>
       <div className="flex flex-col items-center">
-        <div className="flex  gap-1  max-w-[120px] sm:max-w-[160px]  lg:max-w-[260px] justify-center h-fit flex-wrap">
+        <div className="flex  gap-1  max-w-full sm:max-w-[160px]  lg:max-w-[260px] justify-center h-fit flex-wrap">
           <div className="flex w-full justify-center">
             <div className="flex text-white   relative justify-center mb-1 gap-1">
               <button
@@ -22,7 +22,7 @@ export default function Keyboard(props: keyboardProps) {
                 </div>
               </button>
               <div
-                className={`absolute  flex items-center justify-center  border -top-2 -right-1/4 bg-white rounded p-1 ${
+                className={`absolute hidden  sm:flex items-center justify-center  border -top-2 -right-1/4 bg-white rounded p-1 ${
                   notesMode ? " bg-myPrimary" : " bg-mySecondary bg-opacity-90"
                 }`}
               >

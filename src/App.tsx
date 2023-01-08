@@ -247,8 +247,11 @@ function App() {
           ) : !isCompleted ? (
             <>
               <Timer isRunning={isRunning} setIsRunning={setIsRunning} />
-              <div id="field" className="flex w-full gap-1 justify-center  ">
-                <div className="flex flex-col sm:flex-row ">
+              <div
+                id="field"
+                className="container flex w-full gap-1 justify-center  "
+              >
+                <div className="flex flex-col items-center sm:items-start sm:flex-row ">
                   <div className="flex   p-1">
                     <Field
                       field={mainField}
