@@ -13,17 +13,22 @@ export default function LevelSelect({ setLevel }: levelSelectProps) {
     return Math.floor(Math.random() * max);
   }
   return (
-    <div className="flex flex-col w-40 gap-3  items-center justify-center">
-      {sudokuLevels.map((levelType, index) => (
-        <button
-          className="text-slate-100 p-3 w-full font-bold rounded cursor-pointer bg-mySecondary hover:bg-opacity-80"
-          key={index}
-          onClick={() => loadData(index)}
-        >
-          {levelType.title}
-        </button>
-      ))}
-    </div>
+    <>
+      <div className="text-slate-100 font-bold text-4xl mb-8 text-center">
+        Choose difficulty level
+      </div>
+      <div className="flex flex-col w-40 gap-3  items-center justify-center">
+        {sudokuLevels.map((levelType, index) => (
+          <button
+            className="text-slate-100 p-3 w-full font-bold rounded cursor-pointer bg-mySecondary hover:bg-opacity-80"
+            key={index}
+            onClick={() => loadData(index)}
+          >
+            {levelType.title}
+          </button>
+        ))}
+      </div>
+    </>
   );
 }
 type levelSelectProps = {
