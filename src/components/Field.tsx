@@ -3,12 +3,11 @@ import { getRegion, NUMBERS } from "../utils";
 import Cell from "./UI/Cell";
 
 export default function Field(props: fieldProps) {
-  const { field, statusField, selectedCell, handleClick } = props;
-  const isPaused = false; //Todo
+  const { field, statusField, isRunning, selectedCell, handleClick } = props;
   return (
     <>
-      <div className="relative">
-        <table className="su-field bg-mySurface overflow-hidden text-center main-table ">
+      <div className="relative border-white border border-solid">
+        <table className="su-field bg-mySurface    overflow-hidden text-center main-table ">
           <tbody className="">
             {field.map((rowsData, i) => (
               <tr key={i}>
@@ -28,7 +27,11 @@ export default function Field(props: fieldProps) {
             ))}
           </tbody>
         </table>
-        {isPaused && <div className=" absolute inset-0 z-10 bg-white"></div>}
+        {!isRunning && (
+          <div className=" absolute inset-0 z-10 flex bg-mySurface bg-opacity-80 justify-center items-center text-slate-100 font-bold text-5xl text-opacity-70">
+            <span>PAUSED</span>
+          </div>
+        )}
       </div>
     </>
   );
@@ -37,6 +40,7 @@ export default function Field(props: fieldProps) {
 type fieldProps = {
   field: cellData[][];
   statusField: boolean[][];
+  isRunning: boolean;
   selectedCell: { x: number; y: number };
   handleClick: (i: number, j: number) => void;
 };

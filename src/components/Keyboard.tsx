@@ -8,12 +8,12 @@ export default function Keyboard(props: keyboardProps) {
   return (
     <>
       <div className="flex flex-col items-center">
-        <div className="flex  gap-1 max-w-[260px] justify-center h-fit flex-wrap">
+        <div className="flex  gap-1  max-w-[120px] sm:max-w-[160px]  lg:max-w-[260px] justify-center h-fit flex-wrap">
           <div className="flex w-full justify-center">
             <div className="flex text-white   relative justify-center mb-1 gap-1">
               <button
                 onClick={() => setNotesMode((prevValue) => !prevValue)}
-                className={` rounded-full cursor-pointer  text-center hover:bg-opacity-50 w-16 h-16  ${
+                className={` rounded-full cursor-pointer  text-center hover:bg-opacity-50 w-8 h-8 lg:w-16 lg:h-16  ${
                   notesMode ? " bg-myPrimary" : " bg-mySecondary bg-opacity-90"
                 }`}
               >
@@ -33,7 +33,7 @@ export default function Keyboard(props: keyboardProps) {
           {NUMBERS.map((button, i) => (
             <button
               key={i}
-              className={`btn-main`}
+              className={`btn-main btn-main_key`}
               onClick={() => onCLick(button, selectedCell.x, selectedCell.y)}
             >
               {button}
@@ -43,7 +43,7 @@ export default function Keyboard(props: keyboardProps) {
         <div className="flex mt-1 justify-center">
           <button
             onClick={() => onCLick(0, selectedCell.x, selectedCell.y)}
-            className={`btn-main`}
+            className={`btn-main btn-main_key`}
           >
             <BsFillEraserFill />
           </button>

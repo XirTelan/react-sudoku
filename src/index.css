@@ -17,7 +17,10 @@ td {
   user-select: none; /* Standard syntax */
 }
 .btn-main {
-  @apply flex rounded shrink-0  bg-mySecondary bg-opacity-90 hover:bg-opacity-50 w-20 h-20 text-white hover:text-myPrimary  text-4xl font-bold  text-center justify-center items-center;
+  @apply flex rounded shrink-0  bg-mySecondary bg-opacity-90 hover:bg-opacity-50  text-white hover:text-myPrimary    text-center justify-center items-center;
+}
+.btn-main.btn-main_key {
+  @apply lg:w-20 lg:h-20 w-8 h-8 sm:w-10 sm:h-10 text-base lg:text-4xl font-bold;
 }
 .title {
   @apply font-bold text-4xl my-3;

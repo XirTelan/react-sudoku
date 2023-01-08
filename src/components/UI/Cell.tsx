@@ -14,7 +14,7 @@ export default function Cell(props: cellProps) {
   return (
     <td
       tabIndex={0}
-      className={`border hover:bg-myPrimary border-white border-opacity-5   w-16 h-16 hover:cursor-pointer focus-visible:outline-none  text-2xl  leading-3 font-bold ${
+      className={`border hover:bg-myPrimary border-white border-opacity-5  w-5 h-5 sm:w-10 sm:h-10 lg:w-16 lg:h-16 hover:cursor-pointer focus-visible:outline-none text-base  sm:text-2xl  leading-3 font-bold ${
         cell.predefined ? " text-slate-100" : "text-mySecondary"
       }  ${
         selectedCell.x == posX && selectedCell.y == posY
@@ -31,19 +31,19 @@ export default function Cell(props: cellProps) {
       } `}
       onClick={() => handleClick(posX, posY)}
     >
-      {cell.value != null && cell.value != 0 ? (
-        cell.value
-      ) : (
-        <>
-          <div className="flex gap-1 flex-wrap">
-            {NUMBERS.map((number, index) => (
-              <div key={index} className="w-4 h-4">
-                {cell.notes.has(number) ? number : ""}
+      {cell.value != null && cell.value != 0
+        ? cell.value
+        : cell.notes.size > 0 && (
+            <>
+              <div className="flex gap-1 flex-wrap">
+                {NUMBERS.map((number, index) => (
+                  <div key={index} className="w-4 h-4">
+                    {cell.notes.has(number) ? number : ""}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </>
-      )}
+            </>
+          )}
     </td>
   );
 }

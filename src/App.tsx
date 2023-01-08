@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { sudoku } from "./data/sudokuExample";
+import { sudokuLevels } from "./data/sudokuExample";
 import Timer from "./components/Timer";
 import Field from "./components/Field";
 import { createField, createStatusField, NUMBERS } from "./utils";
 import Keyboard from "./components/Keyboard";
 import Description from "./components/Description";
+import LevelSelect from "./components/LevelSelect";
 
 function App() {
   const [isCompleted, setIsComplited] = useState(false);
@@ -13,9 +14,8 @@ function App() {
     x: 0,
     y: 0,
   });
-  const [mainField, setMainField] = useState<cellData[][]>(() =>
-    createField(sudoku.sudokuEasy[0])
-  );
+  const [isRunning, setIsRunning] = useState(true);
+  const [mainField, setMainField] = useState<cellData[][]>([]);
   const [statusField, setStatusField] = useState<boolean[][]>(() =>
     createStatusField()
   );
@@ -45,8 +45,12 @@ function App() {
   function handleClick(i: number, j: number) {
     setSelectedCell({ x: i, y: j });
   }
-
+  function handleKeysClick(value: number, i: number, j: number) {
+    if (!isRunning) return;
+    updateCell(value, i, j);
+  }
   function handleKeyDown(e: KeyboardEvent) {
+    if (!isRunning) return;
     if (e.key == "*") setNotesMode((prev) => !prev);
     if (selectedCell == null || (selectedCell.x == -1 && selectedCell.y == -1))
       return;
@@ -233,45 +237,57 @@ function App() {
 
   return (
     <>
-      <div className=" text-center text-white text-7xl font-bold mb-4 ">
-        Sudoku
-      </div>
-      <div className="App flex flex-col justify-center items-center h-auto">
-        {mainField.length > 0 && !isCompleted ? (
-          <>
-            <Timer />
-            <div id="field" className="flex w-full gap-1 justify-center  ">
-              <div>
-                <div className="flex   p-1">
-                  <div className=" bg-white border border-spacing-0 rounded ">
+      <div className="App">
+        <div className=" text-center text-white text-7xl font-bold mb-4 ">
+          Sudoku
+        </div>
+        <div className=" flex flex-col min-h-[60vh] justify-center items-center h-auto">
+          {mainField.length == 0 ? (
+            <LevelSelect setLevel={setMainField} />
+          ) : !isCompleted ? (
+            <>
+              <Timer isRunning={isRunning} setIsRunning={setIsRunning} />
+              <div id="field" className="flex w-full gap-1 justify-center  ">
+                <div className="flex flex-col sm:flex-row ">
+                  <div className="flex   p-1">
                     <Field
                       field={mainField}
                       statusField={statusField}
                       selectedCell={selectedCell}
+                      isRunning={isRunning}
                       handleClick={handleClick}
                     />
                   </div>
+                  <div className="flex  flex-col  justify-start items-center">
+                    <Keyboard
+                      notesMode={notesMode}
+                      setNotesMode={setNotesMode}
+                      selectedCell={selectedCell}
+                      onCLick={handleKeysClick}
+                    />
+                    <button
+                      onClick={() => {
+                        setMainField([]);
+                      }}
+                      className="btn-main w-full h-5 sm:h-10 text-base  font-bold mt-1"
+                    >
+                      NEW GAME
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div className="flex    justify-center">
-                <Keyboard
-                  notesMode={notesMode}
-                  setNotesMode={setNotesMode}
-                  selectedCell={selectedCell}
-                  onCLick={updateCell}
-                />
+            </>
+          ) : (
+            <>
+              <div className=" absolute flex h-screen w-screen bg-slate-600 h justify-center items-center">
+                <h2>You are win</h2>
               </div>
-            </div>
-            <Description />
-          </>
-        ) : (
-          <>
-            <div className=" absolute flex h-screen w-screen bg-slate-600 justify-center items-center">
-              <h2>You are win</h2>
-            </div>
-          </>
-        )}
-        ;
+            </>
+          )}
+        </div>
+        <div className="flex flex-col  justify-center items-center h-auto">
+          <Description />;
+        </div>
       </div>
     </>
   );

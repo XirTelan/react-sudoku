@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FaPause, FaPlay } from "react-icons/fa";
-export default function Timer() {
+
+export default function Timer(props: timerProps) {
+  const { isRunning, setIsRunning } = props;
   const [time, setTime] = useState(0);
-  const [isRunning, setIsRunning] = useState(true);
 
   useEffect(() => {
     const intreval = setInterval(() => {
@@ -34,3 +35,8 @@ export default function Timer() {
     </>
   );
 }
+
+type timerProps = {
+  isRunning: boolean;
+  setIsRunning: React.Dispatch<React.SetStateAction<boolean>>;
+};
